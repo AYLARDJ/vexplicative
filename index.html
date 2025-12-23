@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passage à Niveau</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Karla', sans-serif;
+            background: #faf8f5;
+            color: #3d3d3d;
+            line-height: 1.65;
+        }
+        .top-line {
+            height: 3px;
+            background: #7c2d36;
+        }
+        .lang-switch {
+            position: fixed;
+            top: 16px;
+            right: 24px;
+            display: flex;
+            gap: 12px;
+        }
+        .lang-btn {
+            background: none;
+            border: none;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            color: #999;
+            padding-bottom: 2px;
+            transition: all 0.2s;
+        }
+        .lang-btn.active {
+            color: #7c2d36;
+            border-bottom: 2px solid #7c2d36;
+        }
+        .container {
+            max-width: 740px;
+            margin: 0 auto;
+            padding: 45px 28px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+        .thank-you {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            font-style: italic;
+            color: #2d2d2d;
+        }
+        .divider {
+            width: 50px;
+            height: 2px;
+            background: #7c2d36;
+            margin: 24px auto 0;
+        }
+        .section { margin-bottom: 32px; }
+        .section-title {
+            font-family: 'EB Garamond', serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: #7c2d36;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        video {
+            width: 100%;
+            display: block;
+            border: 1px solid #e8e4df;
+        }
+        .video-caption {
+            padding: 12px 0;
+            font-size: 13px;
+            color: #888;
+            font-style: italic;
+        }
+        .reference-box {
+            padding: 18px;
+            background: #f5f2ed;
+            border: 1px solid #e8e4df;
+        }
+        .reference-label {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #7c2d36;
+            margin-bottom: 8px;
+        }
+        .reference-text {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .reference-link {
+            color: #7c2d36;
+            font-size: 12px;
+            text-decoration: none;
+        }
+        .reference-link:hover { text-decoration: underline; }
+        @media (max-width: 600px) {
+            .thank-you { font-size: 1.35rem; }
+        }
+        [data-lang="en"] { display: none; }
+        html[lang="en"] [data-lang="fr"] { display: none; }
+        html[lang="en"] [data-lang="en"] { display: block; }
+        html[lang="en"] span[data-lang="en"], html[lang="fr"] span[data-lang="fr"] { display: inline; }
+        html[lang="en"] span[data-lang="fr"], html[lang="fr"] span[data-lang="en"] { display: none; }
+    </style>
+</head>
+<body>
+    <div class="top-line"></div>
+    <div class="lang-switch">
+        <button class="lang-btn active" data-lang-btn="fr" onclick="switchLang('fr')">FR</button>
+        <button class="lang-btn" data-lang-btn="en" onclick="switchLang('en')">EN</button>
+    </div>
+    <div class="container">
+        <header class="header">
+            <h1 class="thank-you">
+                <span data-lang="fr">Merci d'avoir pris le temps de visionner cette vidéo</span>
+                <span data-lang="en">Thank you for taking the time to watch this video</span>
+            </h1>
+            <div class="divider"></div>
+        </header>
+        <section class="section">
+            <h2 class="section-title">
+                <span data-lang="fr">Vidéo explicative</span>
+                <span data-lang="en">Explanatory Video</span>
+            </h2>
+            <video controls>
+                <source src="15.mp4" type="video/mp4">
+            </video>
+            <p class="video-caption">
+                <span data-lang="fr">Modèle utilisé : invideo-ai, Décembre 2025, sur la base des images de l'article ci-dessous</span>
+                <span data-lang="en">Model used: invideo-ai, December 2025, based on images from the article below</span>
+            </p>
+        </section>
+        <section class="section">
+            <h2 class="section-title">
+                <span data-lang="fr">Référence</span>
+                <span data-lang="en">Reference</span>
+            </h2>
+            <div class="reference-box">
+                <div class="reference-label">Source</div>
+                <p class="reference-text">
+                    Read, G.J.M., Beanland, V., Stanton, N.A. <em>et al.</em> From interfaces to infrastructure: extending ecological interface design to re-design rail level crossings. <em>Cogn Tech Work</em> 23, 3–21 (2021).
+                </p>
+                <a href="https://doi.org/10.1007/s10111-019-00583-2" target="_blank" class="reference-link">https://doi.org/10.1007/s10111-019-00583-2</a>
+            </div>
+        </section>
+    </div>
+    <script>
+        function switchLang(lang) {
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[data-lang-btn="${lang}"]`).classList.add('active');
+        }
+    </script>
+</body>
+</html>
